@@ -1,0 +1,29 @@
+﻿Id: <span id="id"></span><br />
+Name<br />
+<input id="name" name="name" type="text" />
+<br />Date OF Birth<br/>
+<input id="description" name="description" type="text" />
+<hr/>
+<input id="do-dept-edit" type="button" value="Save" />
+<a id="dept-list">Back To List</a>
+<script>
+   var iid= $("#id").text(model.Id);
+    $("#name").val(model.name);
+    $("#description").val(model.dateOfBirth);
+
+    $("body").on("click", "#do-dept-edit", function () {
+
+      //  alert(id);
+        $.ajax({
+            type: "PUT",
+            data: { name: $("#name").val(), description: $("#description").val() },
+            url: apiRoot + "/Persons/" + model.Id,
+            success: function () {
+                populateDepartmentTable();
+            },
+            error: function () {
+                alert("Error occured");
+            }
+        });
+    });
+</script>

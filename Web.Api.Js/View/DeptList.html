@@ -1,0 +1,24 @@
+﻿<table>
+    <thead>
+    <tr><th>Name</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<hr />
+<a id="dept-create">Create New</a>
+<hr />
+<script>
+    $("table tbody").empty();
+    for (var i in model) {
+        var tr =    "<tr id='"+ model[i].Id +"'>" +
+                        "<td>" + model[i].Name + "</td>" +
+                        "<td>" + model[i].Description + "</td>" +
+                        "<td><a id='dept-detail'  style='cursor:pointer;'>Detail</a></td>" +
+                        "<td><a id='dept-edit' style='cursor:pointer;'>Edit</a></td>" +
+                        "<td><a id='dept-delete' style='cursor:pointer;'>Delete</a></td>" +
+                    "</tr>";
+        $("table tbody").append(tr);
+    }
+</script>

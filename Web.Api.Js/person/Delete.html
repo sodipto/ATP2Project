@@ -1,0 +1,24 @@
+﻿Id: <span id="id"></span><br />
+Name: <span id="name"></span><br />
+Date Of Birth: <span id="description"></span>
+<hr/>
+<input id="do-dept-delete" type="button" value="Save" />
+<a id="dept-list">Back To List</a>
+<script>
+    $("#id").text(model.Id);
+    $("#name").text(model.name);
+    $("#description").text(model.dateOfBirth);
+
+    $("body").on("click", "#do-dept-delete", function () {
+        $.ajax({
+            type: "DELETE",
+            url: apiRoot + "/Persons/" + model.Id,
+            success: function () {
+                populateDepartmentTable();
+            },
+            error: function () {
+                alert("Error occured");
+            }
+        });
+    });
+</script>

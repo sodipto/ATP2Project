@@ -1,0 +1,22 @@
+﻿Name<br />
+<input id="name" name="name" type="text" />
+<br />Description<br/>
+<input id="description" name="description" type="text" />
+<hr/>
+<input id="do-dept-create" type="button" value="Save" />
+<a id="dept-list">Back To List</a>
+<script>
+    $("body").on("click", "#do-dept-create", function () {
+        $.ajax({
+            type: "POST",
+            data: {name: $("#name").val(), description: $("#description").val()},
+            url: apiRoot + "/departments",
+            success: function () {
+                populateDepartmentTable();
+            },
+            error: function() {
+                alert("Error occured");
+            }
+        });
+    });
+</script>

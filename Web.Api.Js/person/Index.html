@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <script src="../scripts/jquery-3.3.1.js"></script>
+    <script src="../scripts/jquery-3.3.1.intellisense.js"></script>
+
+</head>
+<body>
+
+        <header>
+            <a id="department" onclick="populateDepartmentTable()" style="cursor:pointer;">PersonList</a>|
+            
+            <hr />
+        </header>
+        <section>
+            <div id="pageContainer">
+            </div>
+        </section>
+  
+
+    
+
+<script>
+
+    var apiRoot = " http://localhost:49567/api";
+    var serverRoot = "http://localhost:51836";
+    var model;
+
+    function test() {
+
+        alert("h");
+    }
+
+    function populateDepartmentTable() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:49567/api/Persons",
+            success: function (data) {
+
+              //  alert("ok");
+                 model = data;
+                $("#pageContainer").load(serverRoot + "/person/PersonList.html");
+            },
+
+            error:function(xhr){
+                 
+                alert("Fail");
+            
+            }
+        });
+    }
+
+    $("body").on("click", "#dept-detail", function (event) {
+        var id = $(this).parent().parent().attr('id');
+        //console.log(id);
+        $.ajax({
+            type: "GET",
+            url: apiRoot + "/Persons/" + id,
+            success: function (data) {
+                model = data;
+                $("#pageContainer").load(serverRoot + "/person/Detail.html");
+            }
+        });
+    });
+
+    $("body").on("click", "#dept-list", function () {
+        populateDepartmentTable();
+    });
+
+
+    $("body").on("click", "#dept-create", function () {
+        $("#pageContainer").load(serverRoot + "/person/Create.html");
+    });
+
+    $("body").on("click", "#dept-edit", function () {
+        var id = $(this).parent().parent().attr('id');
+        $.ajax({
+            type: "GET",
+            url: apiRoot + "/Persons/" + id,
+            success: function (data) {
+                model = data;
+                $("#pageContainer").load(serverRoot + "/person/Edit.html");
+            }
+        });
+    });
+
+    $("body").on("click", "#dept-delete", function () {
+        var id = $(this).parent().parent().attr('id');
+        $.ajax({
+            type: "GET",
+            url: apiRoot + "/Persons/" + id,
+            success: function (data) {
+                model = data;
+                $("#pageContainer").load(serverRoot + "/person/Delete.html");
+            }
+        });
+    });
+
+
+
+</script>
+</body>
+
+
+
+
+</html>
